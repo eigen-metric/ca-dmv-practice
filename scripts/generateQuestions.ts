@@ -804,7 +804,7 @@ const categories = {
   }
 };
 
-const categoryNames = Object.keys(categories);
+const categoryNames = Object.keys(categories) as Array<keyof typeof categories>;
 const QUESTIONS_PER_CATEGORY = 60;
 const DIFFICULTY_COUNTS = { easy: 15, medium: 30, hard: 15 };
 
@@ -971,16 +971,20 @@ const categoryDistractorPool = {
   ]
 };
 
-function rotate(arr, shift) {
+function rotate<T>(arr: T[], shift: number): T[] {
   const n = arr.length;
   return arr.map((_, i) => arr[(i + shift) % n]);
 }
 
-function unique(arr) {
+function unique<T>(arr: T[]): T[] {
   return Array.from(new Set(arr));
 }
 
-function buildChoices(correct, distractors, seed) {
+function buildChoices(
+  correct: string,
+  distractors: string[],
+  seed: number
+): { choices: string[]; answerIndex: number } {
   const eligibleDistractors = unique(distractors.filter((d) => d !== correct));
   const baseDistractors = rotate(eligibleDistractors, seed % eligibleDistractors.length).slice(0, 3);
   const base = [correct, ...baseDistractors];
@@ -994,13 +998,17 @@ function buildChoices(correct, distractors, seed) {
   return { choices, answerIndex };
 }
 
-function difficultyByVariant(index) {
+function difficultyByVariant(index: number): 'easy' | 'medium' | 'hard' {
   if (index < DIFFICULTY_COUNTS.easy) return 'easy';
   if (index < DIFFICULTY_COUNTS.easy + DIFFICULTY_COUNTS.medium) return 'medium';
   return 'hard';
 }
 
-function composeScenarioPrefix(category, difficulty, seed) {
+function composeScenarioPrefix(
+  category: keyof typeof categories,
+  difficulty: keyof typeof environmentByDifficulty,
+  seed: number
+): string {
   const environment = environmentByDifficulty[difficulty][seed % environmentByDifficulty[difficulty].length];
   const complication = categoryComplications[category][seed % categoryComplications[category].length];
   return `${environment} ${complication}`;
