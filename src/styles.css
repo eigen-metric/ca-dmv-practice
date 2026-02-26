@@ -1,0 +1,292 @@
+:root {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  color: #1f2937;
+  background: radial-gradient(circle at 20% 20%, #f7fbff 0%, #edf5ff 45%, #e9f2f3 100%);
+  line-height: 1.45;
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.app-shell {
+  padding: 32px;
+  min-height: 100vh;
+}
+
+.card {
+  max-width: 920px;
+  margin: 0 auto;
+  background: #ffffffee;
+  border: 1px solid #d6e3ea;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 18px 40px rgba(35, 66, 80, 0.1);
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 2rem;
+}
+
+h2 {
+  margin: 8px 0;
+}
+
+h3 {
+  margin-bottom: 8px;
+}
+
+.subtle {
+  color: #476072;
+}
+
+.stack {
+  display: grid;
+  gap: 16px;
+}
+
+.stack-sm {
+  display: grid;
+  gap: 10px;
+}
+
+.mode-picker,
+.row-buttons,
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.difficulty-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.chip,
+.primary,
+.secondary,
+.ghost,
+.choice {
+  border: 1px solid #afc4cf;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font: inherit;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.chip {
+  background: #f4f8fb;
+}
+
+.chip.active {
+  background: #cee6ff;
+  border-color: #5c8bb6;
+}
+
+.primary {
+  background: #2f6ea3;
+  color: #fff;
+  border-color: #2f6ea3;
+}
+
+.secondary {
+  background: #edf5ff;
+  color: #1f3f59;
+}
+
+.ghost {
+  background: #fff;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.disabled-row {
+  opacity: 0.7;
+}
+
+.saved-box,
+.reason-box,
+.missed-item,
+.weak-item {
+  border: 1px solid #d4e0e8;
+  border-radius: 14px;
+  padding: 12px;
+  background: #fbfdff;
+}
+
+.error-box {
+  border: 1px solid #d57a7a;
+  background: #fff1f1;
+  color: #7a1e1e;
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin: 10px 0 18px;
+}
+
+.progress-wrap {
+  display: grid;
+  gap: 6px;
+}
+
+.progress-label {
+  font-weight: 600;
+}
+
+.progress-track {
+  height: 12px;
+  background: #e3edf3;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6cb5ff, #2f6ea3);
+}
+
+.question-text {
+  font-size: 1.35rem;
+}
+
+.choices {
+  display: grid;
+  gap: 10px;
+}
+
+.choice {
+  text-align: left;
+  background: #fff;
+}
+
+.choice.correct {
+  background: #d8f5dd;
+  border-color: #4b9154;
+}
+
+.choice.incorrect {
+  background: #ffe1e1;
+  border-color: #b45252;
+}
+
+.feedback {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.feedback.good {
+  color: #1f7a39;
+}
+
+.feedback.bad {
+  color: #a12a2a;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 30, 40, 0.55);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.breath-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  width: min(360px, 100%);
+  text-align: center;
+}
+
+.breath-orb {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  margin: 12px auto;
+  display: grid;
+  place-items: center;
+  color: white;
+  font-weight: 700;
+  background: linear-gradient(150deg, #2f6ea3, #6cb5ff);
+  transform: scale(1);
+}
+
+.phase-inhale {
+  animation: inhale 4s ease-in-out infinite;
+}
+
+.phase-hold {
+  animation: hold 4s ease-in-out infinite;
+}
+
+.phase-exhale {
+  animation: exhale 6s ease-in-out infinite;
+}
+
+@keyframes inhale {
+  from {
+    transform: scale(0.84);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes hold {
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes exhale {
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    transform: scale(0.82);
+  }
+}
+
+@media (max-width: 760px) {
+  .app-shell {
+    padding: 16px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  .question-text {
+    font-size: 1.15rem;
+  }
+}
